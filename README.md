@@ -1,8 +1,5 @@
-# GloSED: Global Standardised Soil Eukaryome Dataset
+## GloSED: Global Standardised Soil Eukaryome Dataset [<img src='assets/MycologyMicrobiologyCenter_logo.png' align="right" height="100" alt="Mycology and Microbiology Center">](https://mmc.ut.ee/?lang=en)
 
-<div style="float: right;">
-  <a href="https://mmc.ut.ee/?lang=en">
-    <img src="assets/MycologyMicrobiologyCenter_logo.png" alt="Mycology and Microbiology Center" width="150">
-  </a>
-</div>
+The Global Standardised Soil Eukaryome Dataset (GloSED) is a metabarcoding-based dataset encompassing the entire spectrum of soil eukaryotes collected and analysed using standardized protocols.
+
 
