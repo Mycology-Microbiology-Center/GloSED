@@ -1,0 +1,8 @@
+{
+  "dataset": "GloSED",
+  "version": "1.0",
+  "dri_orcids": ["0000-0002-1635-1249", "0000-0003-2786-2690"],
+  "contact_email": ["leho.tedersoo@ut.ee", "vladimir.mikryukov@ut.ee"],
+  "notes": "Creators prefer to be contacted prior to reuse; collaboration welcomed."
+}
+
