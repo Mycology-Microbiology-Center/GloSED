@@ -37,7 +37,7 @@ Granular DRI mapping for individual samples and projects:
 3. **Collaborate**: Discuss potential collaboration opportunities  
 4. **Cite properly**: Acknowledge data creators in publications  
 
-## Citation
+## DRI citation
 
 Hug LA, et al. (2025). A roadmap for equitable reuse of public microbiome data. *Nature Microbiology*. DOI:10.1038/s41564-025-02116-2 URL:[https://www.nature.com/articles/s41564-025-02116-2](https://www.nature.com/articles/s41564-025-02116-2)
 
