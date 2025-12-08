@@ -26,3 +26,42 @@ To install NextITS, run:
 nextflow pull vmikk/NextITS
 ```
 
+
+The following command was used to run the Step-1 of the pipeline for each sequencing run:
+
+```bash
+nextflow run vmikk/NextITS -r main \
+  -profile singularity,hpc \
+  -resume \
+  --input    /path/to/sequencing/data/<RunID>/<RunID>.fastq.gz \
+  --barcodes /path/to/sequencing/data/<RunID>/<RunID>_tags.fasta \
+  --primer_forward GTACACACCGCCCGTCG \
+  --primer_reverse CCTSCSCTTANTDATATGC \
+  --lima_barcodetype "dual_symmetric" \
+  --lima_minscore 80 \
+  --its_region    "full" \
+  --chimera_db    "/path/to/Eukaryome_1.9.3_241222_FullITS_100-800.udb" \
+  --outdir        "/path/to/step1_results/<RunID>" \
+  -work-dir       "/path/to/step1_work_dir/<RunID>"
+```
+
+
+```bash
+nextflow run vmikk/NextITS -r main \
+  --step "Step2" \
+  -profile singularity,hpc \
+  --ampliconlen_min 250 \
+  --preclustering "unoise" \
+  --unoise_alpha 6.0 \
+  --unoise_minsize 1 \
+  --clustering "vsearch" \
+  --otu_id 0.98 \
+  --merge_replicates false \
+  --max_MEEP 0.6 \
+  --max_ChimeraScore 0.6 \
+  --data_path "/path/to/step1_results" \
+  --outdir    "/path/to/step2_results" \
+  -work-dir   "/path/to/step2_work_dir" \
+  -resume
+```
+
