@@ -100,3 +100,11 @@ The processed dataset is available on Zenodo [https://zenodo.org/records/1782789
 - `DRI.csv`: Tabular format mapping accession IDs 
 
 
+
+## Data reuse
+
+GloSED implements Data Reuse Information (DRI) tags following the framework proposed by [Hug et al. (2025)](https://www.nature.com/articles/s41564-025-02116-2) for equitable microbiome data sharing. DRI provides machine-readable metadata indicating that data creators prefer to be contacted before reuse, promoting collaboration while supporting open science.
+
+For details, see the [DRI Documentation](./DRI/README.md).
+
+
