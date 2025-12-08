@@ -83,3 +83,20 @@ nextflow run vmikk/NextITS -r main \
 - `bin/biom_validate.py`: Validates the BIOM file format
 
 - `bin/env_surface_functions.R`: Functions used in the `environmental_surface.R` script
+
+## Data files
+
+The processed dataset is available on Zenodo [https://zenodo.org/records/17827890](https://zenodo.org/records/17827890) and includes the following files:
+
+- `GloSED__OTU_sequences.fasta.gz`: Quality-filtered representative sequences for all OTUs, FASTA format  
+- `GloSED__OTU_table.tsv.zip`: Sample-by-OTU abundance matrix (TSV format)  
+- `GloSED__Taxonomy.tsv.zip`: Complete taxonomic annotations with UNITE-based species hypotheses (TSV format)  
+- `GloSED__OTU_table.parquet`: Columnar format of abundance data for efficient querying (Parquet format)  
+- `GloSED__Taxonomy.parquet`: Columnar format of taxonomic data (Parquet format)  
+- `GloSED__phyloseq.RData`: phyloseq object for R-based analyses  
+- `GloSED__BIOM.biom`: BIOM v.2.1 format compatible with QIIME2  
+- `GloSED__Sample_metadata.xlsx`: Sample metadata  
+- `DRI.json`: Data Reuse Information tag with ORCID identifiers  
+- `DRI.csv`: Tabular format mapping accession IDs 
+
+
