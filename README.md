@@ -26,6 +26,9 @@ To install NextITS, run:
 nextflow pull vmikk/NextITS
 ```
 
+The pipeline is divided into two main steps:  
+1. The first step is executed separately for each sequencing run (multiplexed data) because it involves removal of tag-jumps. This step primarily focuses on sequence quality control, ITS extraction, and chimera removal.  
+2. The second step combines data from all runs, performs denoising and sequence clustering.  
 
 The following command was used to run the Step-1 of the pipeline for each sequencing run:
 
@@ -45,6 +48,9 @@ nextflow run vmikk/NextITS -r main \
   -work-dir       "/path/to/step1_work_dir/<RunID>"
 ```
 
+For reference-based chimera detection, the [EUKARYOME](https://eukaryome.org/) database was used as the reference. The file is available on the University of Tartu's ownCloud [https://owncloud.ut.ee/owncloud/s/PkasGDNDimNssm3](https://owncloud.ut.ee/owncloud/s/PkasGDNDimNssm3).
+
+After completion of Step-1 tasks for all sequencing runs, the following command was used to run the Step-2 of the pipeline:
 
 ```bash
 nextflow run vmikk/NextITS -r main \
