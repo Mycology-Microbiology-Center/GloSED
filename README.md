@@ -2,6 +2,11 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17827890.svg)](https://doi.org/10.5281/zenodo.17827890)
 
-The Global Standardised Soil Eukaryome Dataset (GloSED) is a metabarcoding-based dataset encompassing the entire spectrum of soil eukaryotes collected and analysed using standardized protocols.
+The Global Standardised Soil Eukaryome Dataset (GloSED) is a global metabarcoding dataset encompassing the entire spectrum of soil eukaryotes, covering more than 4100 sampling sites in 121 countries and nearly one million taxonomically annotated OTUs. All samples were collected and analysed using standardised field, laboratory, and bioinformatic protocols, and are accompanied by extensive soil and land-cover metadata. This repository hosts the analysis scripts and supporting files associated with the GloSED data descriptor (*Scientific Data*, in preparation) and the Zenodo data release linked above.
 
+## Repository structure
+
+- `bin/`: Analysis scripts  
+- `DRI/`: Data Reuse Information tag used to support equitable data reuse and sequence accession number list  
+- `assets/`: Auxiliary files for the repository  
 
