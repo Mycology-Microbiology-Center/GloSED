@@ -71,3 +71,15 @@ nextflow run vmikk/NextITS -r main \
   -resume
 ```
 
+
+## Analysis scripts
+
+- `bin/environmental_space.R`: Assesses environmental coverage of sampling locations by creating binned 2D visualizations showing how well sampled environmental space represents global conditions for climate (temperature/precipitation) and soil (pH/nitrogen) variables  
+
+- `bin/environmental_surface.R`: Computes environmental representativeness surface by calculating distance from each global grid cell to the nearest sampled location in environmental space (based on the most influential environmental variables identified in [Mikryukov et al. 2023](https://www.science.org/doi/10.1126/sciadv.adj8016))  
+
+- `bin/biom_from_longtab.py`: Converts the long-format OTU table to BIOM v.2.1 HDF5 format compatible with QIIME2
+
+- `bin/biom_validate.py`: Validates the BIOM file format
+
+- `bin/env_surface_functions.R`: Functions used in the `environmental_surface.R` script
