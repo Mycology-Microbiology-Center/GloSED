@@ -10,3 +10,19 @@ The Global Standardised Soil Eukaryome Dataset (GloSED) is a global metabarcodin
 - `DRI/`: Data Reuse Information tag used to support equitable data reuse and sequence accession number list  
 - `assets/`: Auxiliary files for the repository  
 
+## Bioinformatic processing
+
+GloSED was analysed using the fully automated bioinformatics pipeline [NextITS](https://github.com/vmikk/NextITS) (DOI:10.5281/zenodo.15074882) implemented with the workflow manager [Nextflow](https://www.nextflow.io/). Pipeline dependencies are containerised and available on Docker Hub [https://hub.docker.com/r/vmikk/nextits](https://hub.docker.com/r/vmikk/nextits) and Singularity library [https://cloud.sylabs.io/library/vmiks/nextits/nextits](https://cloud.sylabs.io/library/vmiks/nextits/nextits).
+
+To install Nextflow, use the following command:
+
+```bash
+curl -s https://get.nextflow.io | bash
+```
+
+To install NextITS, run:
+
+```bash
+nextflow pull vmikk/NextITS
+```
+
