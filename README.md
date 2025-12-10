@@ -108,3 +108,8 @@ GloSED implements Data Reuse Information (DRI) tags following the framework prop
 For details, see the [DRI Documentation](./DRI/README.md).
 
 
+## Related Resources
+
+- **Bioinformatics pipeline**: [NextITS](https://github.com/vmikk/NextITS)
+- **Reference databases**: [EUKARYOME](https://plutof.ut.ee/), [UNITE](https://unite.ut.ee/)
+
