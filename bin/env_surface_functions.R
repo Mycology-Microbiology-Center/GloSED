@@ -84,3 +84,144 @@ prepare_train_data <- function(train_data, var_importance) {
 }
 
 
+
+## Compute dissimilarity index (DI) for new data
+compute_DI <- function(parquet_file, train_prep, just_DI = FALSE, to_file = TRUE) {
+  # parquet_file = Name of a parquet file with numeric predictor variables for the locations where the representativeness should be evaluated
+  # train_prep = pre-processed training data object created by `prepare_train_data()`
+  # just_DI = logical. If FALSE, return the input data with an added DI column
+  #                    If TRUE, return only DI values with coordinates
+  # to_file = logical. If TRUE, write the result to parquet file
+
+  ## NB! Rows with missing predictor values will receive `NA` 
+
+  ## Create subdir for file results
+  if(to_file == TRUE) {
+    OUTDIR <- "tmp_DI_tiles"
+    dir.create(path = OUTDIR, showWarnings = FALSE)
+  }
+
+  ## Verify train_prep is the correct object type
+  if (!inherits(train_prep, "train_env")) {
+    stop("train_prep must be an object created by prepare_train_data()")
+  }
+
+  ## Read parquet file with the new data
+  new_data <- arrow::read_parquet(parquet_file)
+  setDT(new_data)
+
+  if(nrow(new_data) == 0) {
+    stop("No data found in the new data file\n")
+  }
+
+  ## Check that required variables are present in new_data
+  missing_vars <- setdiff(train_prep$vars, names(new_data))
+  if (length(missing_vars) > 0) {
+    stop("Variables missing in new_data: ", paste(missing_vars, collapse = ", "))
+  }
+
+  ## Extract matrix of predictor values in the correct order
+  clz <- train_prep$vars
+
+  ## Wrapper function to process new data
+  process_new_data <- function(nd, just_DI = just_DI) {
+
+    new_mat <- nd[, ..clz]
+
+    ## Identify rows with complete cases (no NAs) to avoid propagating NAs
+    cc <- complete.cases(new_mat)
+    if(any(!cc)){
+        cat("WARNING: NAs found in new data - these rows will be excluded\n")
+        cat("Number of rows with NAs:", sum(!cc), "\n")
+        new_mat <- new_mat[ cc ]
+    }
+
+    n_ok <- sum(cc)
+    
+    if(n_ok < 1){
+        cat("WARNING: No complete cases found in new data\n")
+        
+        dummy_result <- nd[1, ]
+        dummy_result[, DI := NA]
+        dummy_result <- dummy_result[ -1, ]  # to create empty data.table with all required columns
+
+        if(just_DI == TRUE) {
+        clz <- c("x", "y", "DI")
+        dummy_result <- dummy_result[ , ..clz ]
+        }
+
+        return(dummy_result)
+    }
+
+    ### TO DO - optimize sweep operations (use pure data.table to avoid copying data)
+    ## Scale new data using pre-computed training parameters
+    new_scaled <- sweep(new_mat, 2, train_prep$train_mean, FUN = "-")
+    new_scaled <- sweep(new_scaled, 2, train_prep$train_sd, FUN = "/")
+
+    ## Apply variable importance weights
+    new_scaled <- sweep(new_scaled, 2, train_prep$weights, FUN = "*")
+
+    ## Use Fast Nearest Neighbor search algo
+    ## to find the minimum distance to any training point for each new point
+    min_dist <- FNN::knnx.dist(
+        data = as.matrix(train_prep$train_weighted),  # reference (training) data
+        query = as.matrix(new_scaled),                # query (new) data  
+        k = 1,                                        # find only the closest point
+        algorithm = "brute"                           # use brute force algorithm
+    )[, 1]
+
+    ## Calculate the dissimilarity index by normalising the minimum distances
+    DI <- min_dist / train_prep$trainDist_avrgmean
+
+    ## Add DI to the data (only to complete cases)
+    nd[ cc, DI := DI]
+
+    ## Just keep coorinates if all predictors are not required
+    if(just_DI == TRUE) {
+      clz <- c("x", "y", "DI")
+      nd <- nd[ , ..clz ]
+    }
+
+    return(nd)
+  }                # end of `process_new_data`
+
+  ## Split large datasets into chunks
+  MAXN <- 50000
+  num_chunks <- ceiling(nrow(new_data) / MAXN)
+  chnk <- metagMisc::chunk_table(x = new_data, n = num_chunks, to_list = TRUE)
+  
+  ## Process chunks without writing to file, merge chunks into a single data.table
+  if(to_file == FALSE) {
+
+    res <- plyr::llply(.data = chnk, .fun = process_new_data, just_DI = just_DI)
+    res <- rbindlist(res)
+    return(res)
+
+  ## Process chunks and write each chunk to a separate parquet file
+  } else {
+
+    if(length(chnk) == 1) { names(chnk) <- "1" }
+
+    plyr::a_ply(
+      .data = names(chnk),
+      .margins = 1,
+      .fun = function(x){
+        rez <- process_new_data(nd = chnk[[ x ]], just_DI = just_DI)
+        
+        fname <- sub(pattern = ".parquet", replacement = "", x = basename(parquet_file))
+        fname <- paste0("DI__", fname, "__", x, ".parquet")
+        
+        arrow::write_parquet(x = rez,
+          sink = file.path(OUTDIR, fname),
+          compression = "zstd",
+          compression_level = 6)
+
+        rm(rez)
+        return(NULL)
+      }, .progress = "none")
+
+    return(NULL)
+  }
+
+}
+
