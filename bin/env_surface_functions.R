@@ -2,7 +2,7 @@
 ## GloSED auxillary script
 ## Source functions used in the `environmental_surface.R` script
 ##
-## This implementation is based on the Dissimilarity Index (DI) approach from the CAST package (Meyer & Pebesma, 2021).
+## This implementation is based on the Dissimilarity Index (DI) approach from the CAST package (Meyer & Pebesma, 2021, DOI:10.1111/2041-210X.13650).
 ## This implementation is optimized for chunk-based processing of large raster datasets
 ## (it pre-computes training data scaling/weighting to avoid repeated calculations)
 
