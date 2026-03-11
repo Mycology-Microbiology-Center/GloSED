@@ -123,3 +123,7 @@ physeq
 - **Bioinformatics pipeline**: [NextITS](https://github.com/vmikk/NextITS)
 - **Reference databases**: [EUKARYOME](https://plutof.ut.ee/), [UNITE](https://unite.ut.ee/)
 
+
+## Acknowledgments
+
+This work was supported by the Estonian Research Council, Estonian Ministry of Education and Research, and European Research Council. We thank all researchers, taxonomic specialists, and volunteers who contributed to this global sampling effort.
