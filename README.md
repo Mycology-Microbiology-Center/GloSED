@@ -7,7 +7,6 @@ The Global Standardised Soil Eukaryome Dataset (GloSED) is a global metabarcodin
 ## Repository structure
 
 - `bin/`: Analysis scripts  
-- `DRI/`: Data Reuse Information tag used to support equitable data reuse and sequence accession number list  
 - `assets/`: Auxiliary files for the repository  
 
 ## Bioinformatic processing
@@ -96,16 +95,27 @@ The processed dataset is available on Zenodo [https://zenodo.org/records/1782789
 - `GloSED__phyloseq.RData`: phyloseq object for R-based analyses  
 - `GloSED__BIOM.biom`: BIOM v.2.1 format compatible with QIIME2  
 - `GloSED__Sample_metadata.xlsx`: Sample metadata  
-- `DRI.json`: Data Reuse Information tag with ORCID identifiers  
-- `DRI.csv`: Tabular format mapping accession IDs 
 
 
+## Quick Start
 
-## Data reuse
+### Load dataset in R with [phyloseq](https://joey711.github.io/phyloseq/)
 
-GloSED implements Data Reuse Information (DRI) tags following the framework proposed by [Hug et al. (2025)](https://www.nature.com/articles/s41564-025-02116-2) for equitable microbiome data sharing. DRI provides machine-readable metadata indicating that data creators prefer to be contacted before reuse, promoting collaboration while supporting open science.
+```r
+library(phyloseq)
 
-For details, see the [DRI Documentation](./DRI/README.md).
+# Load the phyloseq object
+physeq <- readRDS("GloSED__phyloseq.RData")
+
+# Inspect the object
+physeq
+
+# phyloseq-class experiment-level object
+# otu_table()   OTU Table:         [ 988824 taxa and 4147 samples ]
+# sample_data() Sample Data:       [ 4147 samples by 27 sample variables ]
+# tax_table()   Taxonomy Table:    [ 988824 taxa by 7 taxonomic ranks ]
+# refseq()      DNAStringSet:      [ 988824 reference sequences ]
+```
 
 
 ## Related Resources
