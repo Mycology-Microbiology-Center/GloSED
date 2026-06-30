@@ -118,6 +118,10 @@ physeq
 ```
 
 
+## Citation
+
+If you use GloSED in your work, please cite both the GloSED data descriptor ([Mikryukov et al. 2026, Scientific Data DOI:10.1038/s41597-026-07315-y](https://www.nature.com/articles/s41597-026-07315-y)) and the Zenodo dataset record linked above ([DOI:10.5281/zenodo.17827890](https://zenodo.org/records/17827890)).
+
 ## Related Resources
 
 - **Raw sequencing data**: [ENA PRJEB103811](https://www.ebi.ac.uk/ena/browser/view/PRJEB103811)
