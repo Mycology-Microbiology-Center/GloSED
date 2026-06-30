@@ -128,6 +128,10 @@ If you use GloSED in your work, please cite both the GloSED data descriptor ([Mi
 - **Bioinformatics pipeline**: [NextITS](https://github.com/vmikk/NextITS)
 - **Reference databases**: [EUKARYOME](https://plutof.ut.ee/), [UNITE](https://unite.ut.ee/)
 
+## Contributing
+
+GloSED will be maintained with periodic updates adding new samples and revising taxonomic annotations as reference databases improve. For questions or contributions, please open an issue or contact the maintainers.
+
 
 ## Acknowledgments
 
