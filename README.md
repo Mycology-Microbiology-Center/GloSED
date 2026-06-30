@@ -125,6 +125,7 @@ If you use GloSED in your work, please cite both the GloSED data descriptor ([Mi
 ## Related Resources
 
 - **Raw sequencing data**: [ENA PRJEB103811](https://www.ebi.ac.uk/ena/browser/view/PRJEB103811)
+- **GloSED data portal**: [GloSED](https://glosed.vmikk.dev/)
 - **Bioinformatics pipeline**: [NextITS](https://github.com/vmikk/NextITS)
 - **Reference databases**: [EUKARYOME](https://plutof.ut.ee/), [UNITE](https://unite.ut.ee/)
 
