@@ -132,6 +132,10 @@ If you use GloSED in your work, please cite both the GloSED data descriptor ([Mi
 
 GloSED will be maintained with periodic updates adding new samples and revising taxonomic annotations as reference databases improve. For questions or contributions, please open an issue or contact the maintainers.
 
+## License
+
+The GloSED dataset is released under CC-BY 4.0. 
+The code present in the current repository is available under MIT license.
 
 ## Acknowledgments
 
